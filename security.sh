@@ -1,6 +1,5 @@
 #! /bin/sh
-set -x
-#PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
+PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 cat /var/log/messages |awk '/Failed/{print $(NF-3)}'|grep "^[0-9]\{1,3\}\.\([0-9]\{1,3\}\.\)\{2\}[0-9]\{1,3\}$"|grep -E -v '192.168|172.16|10.0.0'|sort|uniq -c|awk '{print $2"="$1;}' >/root/blackpasswd.txt
 
 DEFINE="10"
