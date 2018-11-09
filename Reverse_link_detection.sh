@@ -25,7 +25,7 @@ do
 	then
 		message=$(netstat -tapln4|grep $port)
 		address=$(netstat -tapln4|grep $port|awk '{print $5}'|cut -d : -f 1)
-		grep  $address /root/whitelist >> /dev/null 2>&1
+		grep  $address whitelist >> /dev/null 2>&1
 		sucess=$?
 		if [ $sucess -eq 0 ]
 		then
