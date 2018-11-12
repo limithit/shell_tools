@@ -32,8 +32,11 @@ do
 			continue
 		elif [ $sucess -eq 1 ]
 		then
+		         if [ "$address" != "" ]
+                        then
 			echo attack from $address {$message} >>  Reverse_link_detection.log
 		#	echo "$address" |mail -s "{$message}" **@139.com 
+		        fi
 		fi
 	fi
 done
