@@ -19,6 +19,7 @@ do
 	netstat -tapln4| grep -i  established|awk '{if (NR >1){print $4}}'|sort -rn|uniq|awk '{print $1}'|cut -d : -f 2|sort -rn |uniq >ESTABLISHED
 	cat ESTABLISHED | while read port 
 do
+        datetime=`date '+%Y-%m-%d %H:%M:%S'`
 	cat listen | grep $port >> /dev/null 2>&1
 	ret=$?
 	if [ $ret -eq 1  ]
@@ -34,7 +35,7 @@ do
 		then
 		         if [ "$address" != "" ]
                         then
-			echo attack from $address {$message} >>  Reverse_link_detection.log
+			echo $datetime attack from $address {$message} >>  Reverse_link_detection.log
 		#	echo "$address" |mail -s "{$message}" **@139.com 
 		        fi
 		fi
