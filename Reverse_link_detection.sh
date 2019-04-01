@@ -15,8 +15,8 @@ fi
 
 while : 
 do 
-	netstat -tupln4|grep -i listen|awk '{print $4}'|cut -d : -f 2|awk '{print $1}' >listen
-	netstat -tapln4| grep -i  established|awk '{if (NR >1){print $4}}'|sort -rn|uniq|awk '{print $1}'|cut -d : -f 2|sort -rn |uniq >ESTABLISHED
+	netstat -tupln|grep -i listen|awk '{print $4}'|cut -d : -f 2|awk '{print $1}' >listen
+	netstat -tapln| grep -i  established|awk '{if (NR >1){print $4}}'|sort -rn|uniq|awk '{print $1}'|cut -d : -f 2|sort -rn |uniq >ESTABLISHED
 	cat ESTABLISHED | while read port 
 do
         datetime=`date '+%Y-%m-%d %H:%M:%S'`
@@ -24,8 +24,8 @@ do
 	ret=$?
 	if [ $ret -eq 1  ]
 	then
-		message=$(netstat -tapln4|grep $port)
-		address=$(netstat -tapln4|grep $port|awk '{print $5}'|cut -d : -f 1)
+		message=$(netstat -tapln|grep $port)
+		address=$(netstat -tapln|grep $port|awk '{print $5}'|cut -d : -f 1)
 		grep  $address whitelist >> /dev/null 2>&1
 		sucess=$?
 		if [ $sucess -eq 0 ]
