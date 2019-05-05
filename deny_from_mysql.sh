@@ -19,14 +19,14 @@ number=$(echo $line |awk '{print $2}')
 ip=$(echo $line |awk '{print $1}')
 if [ $number -gt 6 ]
 then
-        if [ "$ip" = "192.168.11.1" ]
+        if [ "$ip" = "1xx.xx.11.1" ]
         then
                 continue
-        elif [ "$ip" = "192.168.11.5" ]
+        elif [ "$ip" = "xx.xx.11.5" ]
         then
                 continue
 
-        elif [ "$ip" = "192.168.11.6" ]
+        elif [ "$ip" = "xx.xx.11.6" ]
         then
                 continue
         else
