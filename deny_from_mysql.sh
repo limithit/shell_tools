@@ -11,7 +11,8 @@ add_tables()
                         xtables-multi iptables $@;
                 fi
 }
-mysql -h127.0.0.1 -uaudit -paudit -e "use audit_sec; select sourceip,count(*) from loginfailed_day  where  loginstate=0 and time  <DATE_SUB(CURDATE(),INTERVAL 1 WEEK) group by sourceip having count(*) >6 " >denyip
+mysql -h127.0.0.1 -uaudit -paudit -e "use audit_sec; select sourceip,count(*) from loginfailed_day  where sourceip !='192.168.18' and loginstate=0 and time > NOW()-INTERVAL 5 MINUTE group by sourceip having count(*) >6  
+ " >denyip
 cat denyip|grep -v "172.16" |awk '{if (NR>1){print $1"  "$2}}'|while read line
 do
 number=$(echo $line |awk '{print $2}')
