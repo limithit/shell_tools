@@ -27,7 +27,7 @@ do
     $cmd -u$mysqluser -h$ip -p$mysqlpwd -e "stop slave;set global sql_slave_skip_counter=1;start slave;"
     char="$datatime $ip MySQL slave is not running"
     echo "$last_error"|mail -s "$char" ****@139.com
-    break
+    continue
   fi
   sleep 30
 done
