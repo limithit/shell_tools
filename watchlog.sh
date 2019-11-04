@@ -1,12 +1,13 @@
 #!/bin/bash
+set -x
 if [ $# != 1 ]
   then
   exit 1
 fi
 #tail -n 1 -f /data/v4/nohub_log/qqsk-api-mobile.log|while read var
-tail -n 1 -f ${1}|while read var
+tail -n 5 -f ${1}|while read var
 do 
-	value=`echo $var|grep -i "java.lang.NullPointerException"`
+	value=`echo $var|grep -C 5 -i "java.lang.NullPointerException"`
 	if [ "$value" != "" ]
 	then
 		string=`echo $value | tr '\r\n' '\n'`
@@ -15,7 +16,7 @@ do
                if [ "$md5_value" == "" ]
                 then 
                    redis-cli -h 172.16.xx.xx -n 0 setex $md5 300 $md5
-                 ssh  172.16.xx.xx '/usr/local/zabbix/share/zabbix/alertscripts/monitor.py 15988177 message "'$string'"'
+                 ssh 172.16.xx.xx '/usr/local/zabbix/share/zabbix/alertscripts/monitor.py 15988177 message "'$1' '$string'"'
                else
                    continue
                fi
