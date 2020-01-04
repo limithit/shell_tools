@@ -1,5 +1,6 @@
 #!/bin/sh
 set -x
+#curl http://127.0.0.1:9200/_cat/indices?v
 if [ $# = 2 ]; then
 
 for ((i=1; i<=9; i++))
