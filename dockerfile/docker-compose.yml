@@ -1,0 +1,42 @@
+version: '2'
+
+volumes:
+  mysql:
+    driver: local
+  tomcat:
+    driver: local
+
+services:
+
+  tomcat:
+    image: tomcat:8
+    restart: always
+    ports:
+      - 8080:8080
+    depends_on:
+      - db
+      - sshfortress
+    environment:
+       - SSHFORTRESS_DOMAIN=${SSHFORTRESS_DOMAIN}
+       - SSHFORTRESS_DB_HOST=db
+    volumes:
+       - tomcat:/usr/local/tomcat
+
+  db:
+    image: mysql:5.7
+    restart: always
+    command: mysqld --character-set-server=utf8mb4 --sql_mode=NO_ENGINE_SUBSTITUTION,STRICT_TRANS_TABLES --explicit_defaults_for_timestamp=on --expire_logs_days=3 --log_bin_trust_function_creators=on --collation-server=utf8mb4_unicode_ci --init-connect='SET NAMES utf8mb4;' --innodb-flush-log-at-trx-commit=0
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: "true"
+      MYSQL_DATABASE: "audit_sec"
+      MYSQL_USER: "audit"
+      MYSQL_PASSWORD: "audit"
+    volumes:
+            - mysql:/var/lib/mysql
+
+  sshfortress:
+    image: sshfortress:1.7.2
+    restart: always
+    ports:
+      - 22:2222
+
