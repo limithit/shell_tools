@@ -41,5 +41,5 @@ do
 		fi
 	fi
 done
-sleep 3 
+sleep 1 
 done
