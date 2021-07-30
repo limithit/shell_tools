@@ -7,15 +7,13 @@ fi
 
 while true
 do
-sleep 3
+
 datetime=`date '+%Y-%m-%d %H:%M:%S'`
  port=`netstat -tupln|grep -i 8899|awk '{print $4}'|cut -d : -f 2|awk '{print $1}'`
-if [ "$port" == "8899" ]
+if [ "$port" == "" ]
 then
-        continue
-else
         echo $datetime >> port_monitor.log
         /bin/startup.sh
-        sleep 5
 fi
+sleep 3
 done
