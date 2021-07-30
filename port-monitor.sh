@@ -14,7 +14,7 @@ if [ "$port" == "8899" ]
 then
         continue
 else
-        echo $datetime >> nacos_monitor.log
+        echo $datetime >> port_monitor.log
         /bin/startup.sh
         sleep 5
 fi
