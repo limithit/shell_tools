@@ -1,5 +1,5 @@
 /* --- PRINTF_BYTE_TO_BINARY macro's --- */
-#define PRINTF_BINARY_PATTERN_INT8 "%c%c%c%c%c%c%c%c,"
+#define PRINTF_BINARY_PATTERN_INT8 " %c%c%c%c%c%c%c%c"
 #define PRINTF_BYTE_TO_BINARY_INT8(i)    \
     (((i) & 0x80ll) ? '1' : '0'), \
     (((i) & 0x40ll) ? '1' : '0'), \
@@ -9,7 +9,7 @@
     (((i) & 0x04ll) ? '1' : '0'), \
     (((i) & 0x02ll) ? '1' : '0'), \
     (((i) & 0x01ll) ? '1' : '0')
- 
+
 #define PRINTF_BINARY_PATTERN_INT16 \
     PRINTF_BINARY_PATTERN_INT8              PRINTF_BINARY_PATTERN_INT8
 #define PRINTF_BYTE_TO_BINARY_INT16(i) \
@@ -23,6 +23,7 @@
 #define PRINTF_BYTE_TO_BINARY_INT64(i) \
     PRINTF_BYTE_TO_BINARY_INT32((i) >> 32), PRINTF_BYTE_TO_BINARY_INT32(i)
 /* --- end macros --- */
+
 #include <stdio.h>
 int main()
 {
