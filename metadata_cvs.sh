@@ -1,6 +1,8 @@
 #!/bin/bash
 set -x
 # Convert preprocessed image text links together to metadata.csv 
+# Create an image dataset  
+# https://huggingface.co/docs/datasets/v2.12.0/en/image_dataset
 #cd /root/img
  cd $1
 if [ $# = 1 ]; then
