@@ -6,6 +6,7 @@ set -x
 #cd /root/img
  cd $1
 if [ $# = 1 ]; then
+ echo "file_name,text" >> metadata.csv
 for file in *.png; do
     filename=$(basename "$file")
     filename="${filename%.*}"
