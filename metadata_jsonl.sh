@@ -1,6 +1,6 @@
 #!/bin/bash
 set -x
-# Convert preprocessed image text links together to metadata.csv 
+# Convert preprocessed image text links together to metadata.jsonl 
 #cd /root/ppmt
  cd $1
 if [ $# = 1 ]; then
